@@ -8,7 +8,6 @@ function PageWithForm(props) {
         <form
           name={`form-${props.name}`}
           className={`form__container form__container_place_page`}
-          noValidate
           onSubmit={props.onSubmit}
         >
           {props.children}

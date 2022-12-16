@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PageWithForm from "./PageWithForm";
-import * as mestoAuth from "../utils/mestoAuth.js";
 
 function Register({onRegistr}) {
   const [data, setData] = useState({
@@ -39,8 +38,10 @@ function Register({onRegistr}) {
                 name="email"
                 placeholder="Email"
                 required
+                minLength="2"
+                maxLength="40"
                 className="form__input form__input_place_page"
-                value={data.email}
+                value={data.email || ''}
                 onChange={handleChange}
               />
               <span id="username-error" className="form__error">
@@ -53,7 +54,9 @@ function Register({onRegistr}) {
                 placeholder="Пароль"
                 className="form__input form__input_place_page"
                 required
-                value={data.password}
+                minLength="2"
+                maxLength="40"
+                value={data.password || ''}
                 onChange={handleChange}
               />
               <span id="password-error" className="popup__error">

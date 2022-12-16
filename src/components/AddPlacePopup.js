@@ -40,7 +40,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
               required
               minLength="2"
               maxLength="30"
-              value={name}
+              value={name || ''}
               onChange={handleNameChange}
             />
             <span id="placename-error" className="form__error">Вы пропустили это поле.</span>
@@ -53,7 +53,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
               placeholder="Ссылка на картинку"
               className="form__input form__input_place_popup"
               required
-              value={link}
+              value={link || ''}
               onChange={handleLinkChange}
             />
             <span id="url-error" className="form__error">

@@ -8,7 +8,6 @@ class Api {
   }
 
   #checkResponse(response) {
-    // Михаил Барсегян, спасибо за описание метода!
     if (response.ok) {
       return response.json();
     }

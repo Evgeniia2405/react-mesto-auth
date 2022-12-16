@@ -1,31 +1,32 @@
 import React from "react";
-import { Link, Route, Switch, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, Route, Switch } from "react-router-dom";
 import Logo from "./Logo";
 
 function Header(props) {
-  
-
   const history = useHistory();
-  console.log("From HEADER", props);
-  console.log("From HEADER", props.userEmail.email);
   function signOut() {
     localStorage.removeItem("jwt");
     history.push("/sign-in");
-    props.onSignOut()
+    props.onSignOut();
   }
-  let location = useLocation();
 
   if (!props.userEmail) {
     return (
       <div className="navbar">
         <Logo />
         <div className="navbar__nav">
-          <Link
-            to={location.pathname === "/sign-up" ? "/sign-in" : "/sign-up"}
-            className="navbar__link"
-          >
-            {location.pathname === "/sign-up" ? "Войти" : "Регистрация"}
-          </Link>
+          <Switch>
+            <Route path="/sign-up">
+              <Link className="navbar__link" to="/sign-in">
+                Войти
+              </Link>
+            </Route>
+            <Route path="/sign-in">
+              <Link className="navbar__link" to="/sign-up">
+                Регистрация
+              </Link>
+            </Route>
+          </Switch>
         </div>
       </div>
     );

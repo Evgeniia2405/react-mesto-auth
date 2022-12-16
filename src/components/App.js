@@ -29,6 +29,7 @@ function App() {
   const [imageInfoTooltip, setImageInfoTooltip] = useState("");
   const [textInfoTooltip, setTextInfoTooltip] = useState("");
   const [linkInfoTooltip, setLinkInfoTooltip] = useState("");
+  const [cards, setCards] = useState([]);
   const history = useHistory();
 
   function handleEditProfileClick() {
@@ -44,6 +45,7 @@ function App() {
   }
 
   useEffect(() => {
+    if (loggedIn) {
     api
       .getUserInfo()
       .then((data) => {
@@ -52,7 +54,8 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
-  }, []);
+    }
+  }, [loggedIn]);
 
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
@@ -99,9 +102,8 @@ function App() {
       });
   }
 
-  const [cards, setCards] = useState([]);
-
   useEffect(() => {
+  if (loggedIn) {
     api
       .getInitialCards()
       .then((data) => {
@@ -110,7 +112,8 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
-  }, []);
+    }
+  }, [loggedIn]);
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -218,14 +221,16 @@ function App() {
 
     if (token) {
       mestoAuth.getContent(token).then((res) => {
-        console.log("From useEffect token", res);
         if (res) {
           let userEmail = res.data.email;
           setUserEmail(userEmail);
           setLoggedIn(true);
           history.push("/");
         }
-      });
+      })
+      .catch((err) => {
+        console.log("Ошибка при получении token", err);
+      })
     }
   }, []);
 

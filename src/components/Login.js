@@ -42,7 +42,7 @@ function Login({ onLogin }) {
                 placeholder="Email"
                 required
                 className="form__input form__input_place_page"
-                value={data.email}
+                value={data.email || ''}
                 onChange={handleChange}
               />
               <span id="username-error" className="form__error">
@@ -55,7 +55,7 @@ function Login({ onLogin }) {
                 placeholder="Пароль"
                 className="form__input form__input_place_page"
                 required
-                value={data.password}
+                value={data.password || ''}
                 onChange={handleChange}
               />
               <span id="password-error" className="popup__error">
