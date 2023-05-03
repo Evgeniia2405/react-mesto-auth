@@ -10,6 +10,8 @@
   border-radius: 2px;
   background-color: #FFFFFF;
   color: #000000;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (min-width: 435px) {

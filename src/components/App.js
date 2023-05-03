@@ -44,6 +44,30 @@ function App() {
     setIsEditAvatarPopupOpen(true);
   }
 
+  function handleCheckToken() {
+    const token = localStorage.getItem("jwt");
+      mestoAuth.getContent(token).then((res) => {
+        if (res) {
+          let userEmail = res.email;
+          setUserEmail(userEmail);
+          setLoggedIn(true);
+          setCurrentUser(res);
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        setUserEmail(" ");
+        setLoggedIn(false);
+        setCurrentUser({});
+        localStorage.removeItem("jwt");
+        console.log("Ошибка при получении token", err);
+      })
+  }
+
+  useEffect(() => {
+      handleCheckToken()
+  }, []);
+
   useEffect(() => {
     if (loggedIn) {
     api
@@ -176,8 +200,8 @@ function App() {
     mestoAuth
       .register(email, password)
       .then((res) => {
-        if (res.status !== 400) {
-          history.push("/sign-in");
+        if (res.status !== 200) {
+          // history.push("/sign-in");
           setImageInfoTooltip(imageOkPath);
           setTextInfoTooltip("Вы успешно зарегистрировались!");
           setLinkInfoTooltip("/sign-in");
@@ -185,8 +209,11 @@ function App() {
       })
       .catch((err) => {
         setImageInfoTooltip(imageNOkPath);
-        setTextInfoTooltip("Что-то пошло не так! Попробуйте ещё раз.");
-        console.log("Ошибка", err);
+        if (err===409){
+          setTextInfoTooltip("Ошибка: Такой пользователь уже существует");
+        } else {
+          setTextInfoTooltip(`Ошибка: ${err}`);
+        }
         setLinkInfoTooltip("/sign-up");
       })
       .finally(() => {
@@ -200,15 +227,16 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          history.push("/");
-          setLoggedIn(true);
-          setUserEmail(email);
+          handleCheckToken()
         }
       })
       .catch((err) => {
         setImageInfoTooltip(imageNOkPath);
-        setTextInfoTooltip("Что-то пошло не так! Попробуйте ещё раз.");
-        console.log("Ошибка", err);
+        if (err===401){
+          setTextInfoTooltip("Неправильные почта или пароль");
+        } else {
+          setTextInfoTooltip(`Что-то пошло не так, код ошибки: ${err}`);
+        }
         setLinkInfoTooltip("/sign-in");
       })
       .finally(() => {
@@ -216,26 +244,8 @@ function App() {
       });
   }
 
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-
-    if (token) {
-      mestoAuth.getContent(token).then((res) => {
-        if (res) {
-          let userEmail = res.data.email;
-          setUserEmail(userEmail);
-          setLoggedIn(true);
-          history.push("/");
-        }
-      })
-      .catch((err) => {
-        console.log("Ошибка при получении token", err);
-      })
-    }
-  }, []);
-
   function handleSignOut() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("jwt");
     setUserEmail("");
   }
 

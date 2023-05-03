@@ -10,7 +10,7 @@ function Header(props) {
     props.onSignOut();
   }
 
-  if (!props.userEmail) {
+  if (!localStorage.getItem("jwt")) {
     return (
       <div className="navbar">
         <Logo />

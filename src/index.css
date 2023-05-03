@@ -69,8 +69,10 @@
 @import url(./blocks/form/form.css);
 
 @import url(./blocks/form/__button/form__button.css);
+
 @import url(./blocks/form/__button/_place/form__button_place_page.css);
 @import url(./blocks/form/__button/_place/form__button_place_popup.css);
+@import url(./blocks/form/__button/_disable/form__button_disable.css);
 
 @import url(./blocks/form/__container/form__container.css);
 @import url(./blocks/form/__container/_place/form__container_place_page.css);
@@ -82,9 +84,9 @@
 @import url(./blocks/form/__title/form__title.css);
 @import url(./blocks/form/__title/_place/form__title_place_page.css);
 @import url(./blocks/form/__title/_place/form__title_place_popup.css);
-@import url(./blocks/form/__error/_visible/form__error_visible.css);
-@import url(./blocks/form/__error/form__error.css);
 
+@import url(./blocks/form/__error/form__error.css);
+@import url(./blocks/form/__error/_visible/form__error_visible.css);
 @import url(./blocks/footer/footer.css);
 @import url(./blocks/footer/__copyright/footer__copyright.css);
 
