@@ -1,5 +1,4 @@
-export const BASE_URL = "https://api.mesto.evgenia2405.nomoredomainsclub.ru";
-// export const BASE_URL = "http://localhost:3001";
+export const BASE_URL = "https://auth.nomoreparties.co";
 function getResponse(res) {
   if (!res.ok) {
     return Promise.reject(res.status);
