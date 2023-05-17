@@ -5,7 +5,7 @@
 Цель проекта: создание регистрации и авторизации в проект [Mesto](https://github.com/Evgeniia2405/mesto-react) на «Реакте».
 
 Сайт Место</br>
-![](/src/images/img_readme_0.jpg.jpg)
+![](/src/images/img_readme_0.jpg)
 **Стек**
 - HTML
 - CSS
