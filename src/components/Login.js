@@ -34,7 +34,7 @@ function Login({ onLogin }) {
                 value={email.value}
                 onChange={(e) => email.onChange(e)}
                 onBlur={(e) => email.onBlur(e)}
-                dirty={email.isDirty}
+                dirty={email.isDirty ? 1 : 0}
                 error={
                   (email.isDirty && email.isEmpty.state
                     ? email.isEmpty.textError
@@ -69,7 +69,7 @@ function Login({ onLogin }) {
                 value={password.value}
                 onChange={(e) => password.onChange(e)}
                 onBlur={(e) => password.onBlur(e)}
-                dirty={password.isDirty}
+                dirty={password.isDirty ? 1 : 0}
                 error={
                   (password.isDirty && password.isEmpty.state
                     ? email.isEmpty.textError

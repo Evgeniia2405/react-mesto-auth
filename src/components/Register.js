@@ -35,7 +35,8 @@ function Register({ onRegistr }) {
                 value={email.value}
                 onChange={(e) => email.onChange(e)}
                 onBlur={(e) => email.onBlur(e)}
-                dirty={email.isDirty}
+                dirty={email.isDirty ? 1 : 0}
+                //dirty={email.isDirty}
                 error={
                   (email.isDirty && email.isEmpty.state
                     ? email.isEmpty.textError
@@ -70,7 +71,8 @@ function Register({ onRegistr }) {
                 value={password.value}
                 onChange={(e) => password.onChange(e)}
                 onBlur={(e) => password.onBlur(e)}
-                dirty={password.isDirty}
+                dirty={password.isDirty ? 1 : 0}
+                //dirty={password.isDirty}
                 error={
                   (password.isDirty && password.isEmpty.state
                     ? email.isEmpty.textError

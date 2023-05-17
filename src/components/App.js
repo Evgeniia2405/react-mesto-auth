@@ -26,7 +26,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-  const [imageInfoTooltip, setImageInfoTooltip] = useState("");
+  const [imageInfoTooltip, setImageInfoTooltip] = useState(false);
   const [textInfoTooltip, setTextInfoTooltip] = useState("");
   const [linkInfoTooltip, setLinkInfoTooltip] = useState("");
   const [cards, setCards] = useState([]);
@@ -43,30 +43,6 @@ function App() {
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
-
-  function handleCheckToken() {
-    const token = localStorage.getItem("jwt");
-      mestoAuth.getContent(token).then((res) => {
-        if (res) {
-          let userEmail = res.email;
-          setUserEmail(userEmail);
-          setLoggedIn(true);
-          setCurrentUser(res);
-          history.push("/");
-        }
-      })
-      .catch((err) => {
-        setUserEmail(" ");
-        setLoggedIn(false);
-        setCurrentUser({});
-        localStorage.removeItem("jwt");
-        console.log("Ошибка при получении token", err);
-      })
-  }
-
-  useEffect(() => {
-      handleCheckToken()
-  }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -200,20 +176,19 @@ function App() {
     mestoAuth
       .register(email, password)
       .then((res) => {
-        if (res.status !== 200) {
-          // history.push("/sign-in");
-          setImageInfoTooltip(imageOkPath);
+        if (res.status !== 400) {
+          history.push("/sign-in");
+          setImageInfoTooltip(true);
+          //setImageInfoTooltip(imageOkPath);
           setTextInfoTooltip("Вы успешно зарегистрировались!");
           setLinkInfoTooltip("/sign-in");
         }
       })
       .catch((err) => {
-        setImageInfoTooltip(imageNOkPath);
-        if (err===409){
-          setTextInfoTooltip("Ошибка: Такой пользователь уже существует");
-        } else {
-          setTextInfoTooltip(`Ошибка: ${err}`);
-        }
+        setImageInfoTooltip(false);
+        //setImageInfoTooltip(imageNOkPath);
+        setTextInfoTooltip("Что-то пошло не так! Попробуйте ещё раз.");
+        console.log("Ошибка", err);
         setLinkInfoTooltip("/sign-up");
       })
       .finally(() => {
@@ -227,25 +202,48 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          handleCheckToken()
+          //history.push("/");
+          setLoggedIn(true);
+          setUserEmail(email);
+          //setImageInfoTooltip(imageOkPath);
+          setImageInfoTooltip(true);
+          setTextInfoTooltip("Вы успешно вошли!");
+          setLinkInfoTooltip("/");
         }
       })
       .catch((err) => {
-        setImageInfoTooltip(imageNOkPath);
-        if (err===401){
-          setTextInfoTooltip("Неправильные почта или пароль");
-        } else {
-          setTextInfoTooltip(`Что-то пошло не так, код ошибки: ${err}`);
-        }
+        //setImageInfoTooltip(imageNOkPath);
+        setImageInfoTooltip(false);
+        setTextInfoTooltip("Что-то пошло не так! Попробуйте ещё раз.");
+        console.log("Ошибка", err);
         setLinkInfoTooltip("/sign-in");
+        console.log("IsInfoTooltip", isInfoTooltip);
       })
       .finally(() => {
         setIsInfoTooltip(true);
       });
   }
 
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+
+    if (token) {
+      mestoAuth.getContent(token).then((res) => {
+        if (res) {
+          let userEmail = res.data.email;
+          setUserEmail(userEmail);
+          setLoggedIn(true);
+          history.push("/");
+        }
+      })
+      .catch((err) => {
+        console.log("Ошибка при получении token", err);
+      })
+    }
+  }, []);
+
   function handleSignOut() {
-    localStorage.removeItem("jwt");
+    localStorage.removeItem("token");
     setUserEmail("");
   }
 
@@ -303,7 +301,7 @@ function App() {
             imageInfoTooltip={imageInfoTooltip}
             textInfoTooltip={textInfoTooltip}
             linkInfoTooltip={linkInfoTooltip}
-            loggedIn={loggedIn}
+            //loggedIn={loggedIn}
           />
           <Footer />
         </div>

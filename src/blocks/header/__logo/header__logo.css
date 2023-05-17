@@ -5,6 +5,7 @@
   object-fit: contain;
   margin: 0 auto 31.6px 27px;
   margin-top: 20px;
+  background-image: url(../../../images/header_logo.svg);
 }
 
 @media screen and (min-width: 768px) {
