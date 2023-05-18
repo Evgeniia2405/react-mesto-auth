@@ -1,0 +1,9 @@
+.navbar__nav_user {
+  display: none;
+}
+
+@media screen and (min-width: 500px) {
+  .navbar__nav_user {
+    display: flex;
+  }
+  }

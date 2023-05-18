@@ -32,12 +32,13 @@ function Header(props) {
     );
   } else {
     return (
+      <>
       <div className="navbar">
         <div className="navbar__logo">
           <Logo />
         </div>
         <ul className="navbar__nav">
-          <li>{props.userEmail}</li>
+          <li className="navbar__nav_user">{props.userEmail}</li>
           <li>
             <button onClick={signOut} className="navbar__link navbar__button">
               Выйти
@@ -45,6 +46,8 @@ function Header(props) {
           </li>
         </ul>
       </div>
+      <p className="header__text">{props.userEmail}</p>
+      </>
     );
   }
 }

@@ -15,10 +15,12 @@
 
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__logo/header__logo.css);
+@import url(./blocks/header/__text/header__text.css);
 
 @import url(./blocks/navbar/navbar.css);
 @import url(./blocks/navbar/__link/navbar__link.css);
 @import url(./blocks/navbar/__nav/navbar__nav.css);
+@import url(./blocks/navbar/__nav/_user/navbar__nav_user.css);
 @import url(./blocks/navbar/__button/navbar__button.css);
 @import url(./blocks/navbar/__link/_hidden/navbar__link_hidden.css);
 
