@@ -29,7 +29,7 @@
 - cверстаны новые компоненты: Login, Register, InfoTooltip;
 - реализована аутентификация пользователя;
 - реализована работа с локальным хранилищем и токеном;
-- в проекте используется бэкенд предоставленный Яндекс.Практикум базовый URLnp: [https://auth.nomoreparties.co](https://auth.nomoreparties.co).
+- в проекте используется бэкенд предоставленный Яндекс.Практикум базовый URL: [https://auth.nomoreparties.co](https://auth.nomoreparties.co).
 
 **Ссылка GitHub Pages:**
 [https://evgeniia2405.github.io/react-mesto-auth/](https://evgeniia2405.github.io/react-mesto-auth/)
@@ -41,7 +41,7 @@
 **Инструкция по запуску проекта**
 - клонировать репозиторий
 - выполнить команду npm install для установки зависимостей
-- для просмотра проекта выполнить команду npm run start
+- выполнить команду npm run start
 
 **Планы по доработке проекта:**
 - сделать бургер меню;
